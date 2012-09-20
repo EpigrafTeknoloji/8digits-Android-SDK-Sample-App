@@ -18,13 +18,15 @@ public class SecondActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_second);
     this.eightDigitsClient = EightDigitsClient.getInstance();
-    try {
-      this.hitCode = this.eightDigitsClient.newScreen("SecondAndroidActivity",
-          "/second");
-    } catch (EightDigitsApiException e) {
-      Log.e("API Error", e.getMessage());
-    }
+    this.eightDigitsClient.newScreen("SecondAndroidActivity", "/second");
   }
+  
+  @Override
+  protected void onRestart() {
+    super.onRestart();
+    this.eightDigitsClient.onRestart("SecondAndroidActivity", "/second");
+  }
+  
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {

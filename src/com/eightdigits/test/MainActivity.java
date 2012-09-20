@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
         createEightDigitsClient();
         fillListView();
         attachListViewEvents();
+        System.out.println(android.os.Build.VERSION.SDK_INT);
     }
 
     @Override
@@ -47,7 +48,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
       super.onDestroy();
-      this.eightDigitsClient.endScreen(this.hitCode);
+      this.eightDigitsClient.endScreen();
+    }
+    
+    @Override
+    protected void onRestart() {
+      super.onRestart();
+      this.eightDigitsClient.onRestart("Yeni ziyaret", "/home");
     }
     
     private void init() {
@@ -84,12 +91,9 @@ public class MainActivity extends Activity {
       this.eightDigitsClient = EightDigitsClient.createInstance(this,
           "http://demo1.8digits.com", "DJjAd2sj03");
       
-      try {
-        this.eightDigitsClient.authWithUsername("verisun", "hebelek");
-        this.hitCode = this.eightDigitsClient.newVisit("Yeni Ziyaret", "/home");
-      } catch (EightDigitsApiException e) {
-        Log.e("API Error", e.getMessage());
-      }
+      this.eightDigitsClient.authWithUsername("verisun", "hebelek");
+      this.eightDigitsClient.newVisit("Yeni Ziyaret", "/home");
+      
     }
     
     /**
@@ -107,7 +111,7 @@ public class MainActivity extends Activity {
       
       @Override
       public void onClick(View v) {
-        this.activity.eightDigitsClient.newEvent("newactivitybuttonclicked", "buttonvalue", this.activity.hitCode);
+        this.activity.eightDigitsClient.newEvent("newactivitybuttonclicked", "buttonvalue");
         Intent secondActivityIntent = new Intent(this.activity, SecondActivity.class);
         this.activity.startActivity(secondActivityIntent);
       }
@@ -131,7 +135,7 @@ public class MainActivity extends Activity {
       public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
           long arg3) {
         Toast.makeText(this.activity.getApplicationContext(), this.activity.items[arg2], Toast.LENGTH_LONG).show();
-        this.activity.eightDigitsClient.newEvent("New Click On List", this.activity.items[arg2], this.activity.hitCode);
+        this.activity.eightDigitsClient.newEvent("New Click On List", this.activity.items[arg2]);
       }
     }
 }
