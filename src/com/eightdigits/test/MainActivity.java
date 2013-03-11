@@ -2,14 +2,9 @@ package com.eightdigits.test;
 
 import java.util.Arrays;
 
-import com.eightdigits.sdk.EightDigitsClient;
-import com.eightdigits.sdk.exceptions.EightDigitsApiException;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.eightdigits.sdk.EightDigitsClient;
 
 public class MainActivity extends Activity {
     public String[] items = new String[20];
@@ -88,9 +85,12 @@ public class MainActivity extends Activity {
      * Creates and assigns an instance of 8digits client
      */
     private void createEightDigitsClient() {
-      this.eightDigitsClient = EightDigitsClient.createInstance(this, "demo2.8digits.com/api/", "mhg2hpmb");
-      this.eightDigitsClient.auth("2c24f939d2ff019c1e75ee11b9d44e5c");
+      this.eightDigitsClient = EightDigitsClient.createInstance(this, "http://192.168.1.89:8080/api/", "DJjAd2sj01");
+      this.eightDigitsClient.auth("3b755d11ac246bf7e0d7cd4bde712145");
       this.eightDigitsClient.newVisit("Yeni Ziyaret", "/home");
+      this.eightDigitsClient.setLocation("41.4", "29.5");
+      this.eightDigitsClient.setVisitorAttribute("fullName", "Serkan Karababa");
+      this.eightDigitsClient.setVisitorGSM("Turkcell");
       
     }
     
