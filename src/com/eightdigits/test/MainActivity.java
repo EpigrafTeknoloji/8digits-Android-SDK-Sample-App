@@ -85,12 +85,11 @@ public class MainActivity extends Activity {
      * Creates and assigns an instance of 8digits client
      */
     private void createEightDigitsClient() {
-      this.eightDigitsClient = EightDigitsClient.createInstance(this, "http://192.168.1.89:8080/api/", "DJjAd2sj01");
-      this.eightDigitsClient.auth("3b755d11ac246bf7e0d7cd4bde712145");
-      this.eightDigitsClient.newVisit("Yeni Ziyaret", "/home");
-      this.eightDigitsClient.setLocation("41.4", "29.5");
-      this.eightDigitsClient.setVisitorAttribute("fullName", "Serkan Karababa");
-      this.eightDigitsClient.setVisitorGSM("Turkcell");
+      this.eightDigitsClient = EightDigitsClient.createInstance(this, "http://192.168.2.216:8080/api/", "DJjAd2sj01");
+      this.eightDigitsClient.auth("13b3bc0067289fb442a283901aa77748");
+      // this.eightDigitsClient.setLocation("41.29", "29.24");
+      this.eightDigitsClient.newVisit("Yeni Ziyaret", "/home3");
+      this.eightDigitsClient.newEvent("event5", "value1");
       
     }
     
